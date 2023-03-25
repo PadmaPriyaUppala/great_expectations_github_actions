@@ -26,7 +26,7 @@ jobs:
       uses: actions/github-script@v2
       with:
         github-token: ${{ secrets.TOKEN }}
-        script: |
+        script:
             if (process.env.FAILURE_FLAG == 1 ) {
               msg = `Failed Great Expectations Checkpoint(s) \`${process.env.FAILED_CHECKPOINTS}\` detected for: ${process.env.SHA}.  Corresponding Data Docs have been generated and can be viewed [here](${process.env.DOCS_LOCATION}).`;
             }else {
