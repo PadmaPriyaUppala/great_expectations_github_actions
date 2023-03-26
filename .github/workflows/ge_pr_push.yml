@@ -15,9 +15,7 @@ jobs:
       uses: actions/checkout@main
     
     - name: Set up python
-      uses: actions/setup-python@v2
-      with:
-      	python-version: '3.11'
+      uses: actions/setup-python@v3
 	
       # Run Great Expectations and deploy Data Docs to Netlify
       # In this example, we have configured a Checkpoint called "locations.rds.chk".
