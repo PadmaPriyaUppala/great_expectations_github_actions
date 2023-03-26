@@ -1,6 +1,9 @@
-# Automatically Runs Great Expectation Checkpoints on every push to a PR.
-name: PR Push
-on: pull_request
+# Automatically Runs Great Expectation Checkpoints.
+name: Great Expectations
+on:
+  push:
+    branches:
+      -main
 
 jobs:
   great_expectations_validation:
@@ -11,6 +14,11 @@ jobs:
     - name: Copy Repository contents
       uses: actions/checkout@main
     
+    - name: Set up python
+      uses: actions/setup-python@v2
+      with:
+      	python-version: '3.11'
+	
       # Run Great Expectations and deploy Data Docs to Netlify
       # In this example, we have configured a Checkpoint called "locations.rds.chk".
     - name: Run Great Expectation Checkpoints
@@ -43,6 +51,6 @@ jobs:
       env:
         DOCS_LOCATION: "${{ steps.ge.outputs.action_docs_location }}"
         FAILED_CHECKPOINTS: ${{ steps.ge.outputs.failing_checkpoints }}
-	  PASSED_CHECKPOINTS: ${{ steps.ge.outputs.passing_checkpoints }}
+	PASSED_CHECKPOINTS: ${{ steps.ge.outputs.passing_checkpoints }}
         SHA: ${{ github.sha }}
         FAILURE_FLAG: ${{ steps.ge.outputs.checkpoint_failure_flag }}
