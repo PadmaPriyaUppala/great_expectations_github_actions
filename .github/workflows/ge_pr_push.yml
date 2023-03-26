@@ -32,7 +32,7 @@ jobs:
       uses: actions/github-script@v3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
+        script:
             if (process.env.FAILURE_FLAG == 1 ) {
               msg = `Failed Great Expectations Checkpoint(s) detected.  Corresponding Data Docs have been generated and can be viewed.`;
               console.log(${process.env.DOCS_LOCATION});
@@ -44,15 +44,15 @@ jobs:
             }
             console.log(${msg});
             github.issues.createComment({
-             issue_number: context.issue.number,
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             body: msg 
+             issue_number:context.issue.number,
+             owner:context.repo.owner,
+             repo:context.repo.repo,
+             body:msg 
             });
 		
       env:
-        DOCS_LOCATION: ${{ steps.ge.outputs.action_docs_location }}
-        FAILED_CHECKPOINTS: ${{ steps.ge.outputs.failing_checkpoints }}
+      	DOCS_LOCATION: ${{ steps.ge.outputs.action_docs_location }}
+	FAILED_CHECKPOINTS: ${{ steps.ge.outputs.failing_checkpoints }}
 	PASSED_CHECKPOINTS: ${{ steps.ge.outputs.passing_checkpoints }}
-        SHA: ${{ github.sha }}
-        FAILURE_FLAG: ${{ steps.ge.outputs.checkpoint_failure_flag }}
+	SHA: ${{ github.sha }}
+	FAILURE_FLAG: ${{ steps.ge.outputs.checkpoint_failure_flag }}
