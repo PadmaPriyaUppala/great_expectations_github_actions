@@ -29,10 +29,10 @@ jobs:
       # Comment on PR with link to deployed Data Docs if there is a failed Checkpoint, otherwise don't comment.
     - name: Comment on PR 
       if: ${{ always() }}
-      uses: actions/github-script@v2
+      uses: actions/github-script@v3
       with:
-        github-token: ${{ secrets.TOKEN }}
-        script:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
             if (process.env.FAILURE_FLAG == 1 ) {
               msg = `Failed Great Expectations Checkpoint(s) detected.  Corresponding Data Docs have been generated and can be viewed.`;
               console.log(${process.env.DOCS_LOCATION});
@@ -44,10 +44,10 @@ jobs:
             }
             console.log(${msg});
             github.issues.createComment({
-                 issue_number: context.issue.number,
-                 owner: context.repo.owner,
-                 repo: context.repo.repo,
-                 body: msg 
+             issue_number: context.issue.number,
+             owner: context.repo.owner,
+             repo: context.repo.repo,
+             body: msg 
             });
 		
       env:
