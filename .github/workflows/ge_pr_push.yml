@@ -3,7 +3,7 @@ name: Great Expectations
 on:
   push:
     branches:
-      -main
+      - main
 
 jobs:
   great_expectations_validation:
@@ -16,7 +16,7 @@ jobs:
     
     - name: Set up python
       uses: actions/setup-python@v3
-	
+
       # Run Great Expectations and deploy Data Docs to Netlify
       # In this example, we have configured a Checkpoint called "locations.rds.chk".
     - name: Run Great Expectation Checkpoints

@@ -1,4 +1,8 @@
 name: run-puppala-chkpt-taxi
+on:
+  pull-request:
+    branches:
+      - main
  
 jobs:
   great_expectations_validation:
