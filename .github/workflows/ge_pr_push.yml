@@ -34,9 +34,13 @@ jobs:
         github-token: ${{ secrets.TOKEN }}
         script:
             if (process.env.FAILURE_FLAG == 1 ) {
-              msg = `Failed Great Expectations Checkpoint(s) detected for: ${process.env.SHA}.  Corresponding Data Docs have been generated and can be viewed [here](${process.env.DOCS_LOCATION}).`;
+              msg = `Failed Great Expectations Checkpoint(s) detected for: ${process.env.SHA}.  Corresponding Data Docs have been generated and can be viewed.`;
+              console.log(${process.env.DOCS_LOCATION})
+              console.log(${process.env.FAILED_CHECKPOINTS})
             }else {
-              msg = `All Checkpoints for: ${process.env.SHA} have passed.  Corresponding Data Docs have been generated and can be viewed [here](${process.env.DOCS_LOCATION}).`;
+              msg = `All Checkpoints for: ${process.env.SHA} have passed.  Corresponding Data Docs have been generated and can be viewed.`;
+              console.log(${process.env.DOCS_LOCATION})
+              console.log(${process.env.PASSED_CHECKPOINTS})
             }
             console.log(`Message to be emitted: ${msg}`);
             github.issues.createComment({
@@ -47,7 +51,7 @@ jobs:
             });
 		
       env:
-        DOCS_LOCATION: "${{ steps.ge.outputs.action_docs_location }}"
+        DOCS_LOCATION: ${{ steps.ge.outputs.action_docs_location }}
         FAILED_CHECKPOINTS: ${{ steps.ge.outputs.failing_checkpoints }}
 	PASSED_CHECKPOINTS: ${{ steps.ge.outputs.passing_checkpoints }}
         SHA: ${{ github.sha }}
