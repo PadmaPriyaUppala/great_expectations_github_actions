@@ -42,7 +42,7 @@ jobs:
               console.log(${process.env.DOCS_LOCATION});
               console.log(${process.env.PASSED_CHECKPOINTS});
             }
-            console.log(`Message to be emitted: ${msg}`);
+            console.log(${msg});
             github.issues.createComment({
                  issue_number: context.issue.number,
                  owner: context.repo.owner,
